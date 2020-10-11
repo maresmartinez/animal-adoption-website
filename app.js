@@ -7,9 +7,10 @@ const app = express();
 // Middleware
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+// Routes
+const helloRoutes = require('./routes/hello');
+
+app.use('/hello', helloRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
