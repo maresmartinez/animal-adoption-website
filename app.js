@@ -19,9 +19,9 @@ mongoose.connect(uri, {
   .catch(err => console.log(err));
 
 // Routes
-const animalRoutes = require('./routes/animal');
+const animalRoutes = require('./routes/animals');
 
-app.use('/api/animal', animalRoutes);
+app.use('/api/animals', animalRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
