@@ -26,7 +26,7 @@ router.get('/:id', async (req, res) => {
       return;
     }
 
-    res.status(200).json(animals);
+    res.status(200).json(animal);
   }
   catch (error) {
     res.status(500).json({
@@ -53,6 +53,31 @@ router.post('/', async (req, res) => {
     res.status(500).json({
       message: error.message,
     });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const animal = await Animal.findById(id);
+
+    if (!animal) {
+      res.status(400).json({ message: `No Animal with the ID: ${id}` });
+      return;
+    }
+
+    // TODO: Make less repetitive
+    animal.name = req.body.name ? req.body.name : animal.name;
+    animal.description = req.body.description ? req.body.description : animal.description;
+    animal.species = req.body.species ? req.body.species : animal.species;
+    animal.breed = req.body.breed ? req.body.breed : animal.breed;
+
+    await animal.save();
+
+    res.status(200).json(animal);
+  }
+  catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 
