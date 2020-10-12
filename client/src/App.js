@@ -1,22 +1,27 @@
 import React from 'react';
-
-import { Provider } from 'react-redux';
-import store from './store';
-import AnimalList from './components/AnimalList';
-import AnimalModal from './components/AnimalModal';
+import { Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import About from './pages/About';
+import Navigation from './components/Navigation';
+import { Container } from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    // Allows us to share state between components
-    <Provider store={ store }>
-      <div className="App">
-        <h1>Hello World</h1>
-        <AnimalModal />
-        <AnimalList />
-      </div>
-    </Provider>
+    <>
+      <header>
+        <Navigation />
+      </header>
+      <main className="App">
+        <Container>
+          <Switch>
+            <Route path='/' exact component={ Home } />
+            <Route path='/about' component={ About } />
+          </Switch>
+        </Container>
+      </main>
+    </>
   );
 }
 
