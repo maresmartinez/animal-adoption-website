@@ -11,7 +11,6 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addAnimal } from '../actions/animalActions';
-import { v4 as uuidv4 } from 'uuid';
 import PropTypes from 'prop-types';
 
 class AnimalModal extends Component {
@@ -39,7 +38,6 @@ class AnimalModal extends Component {
     const { name, description, species, breed } = this.state;
 
     const newAnimal = {
-      id: uuidv4(),
       name,
       description,
       species,
@@ -68,7 +66,7 @@ class AnimalModal extends Component {
               </FormGroup>
               <FormGroup>
                 <Label for="description">Description *</Label>
-                <Input type="textarea" name="text" id="description" onChange={ this.onInputChange } />
+                <Input type="textarea" name="description" id="description" onChange={ this.onInputChange } />
               </FormGroup>
               <FormGroup>
                 <Label for="species">Species *</Label>
@@ -94,6 +92,5 @@ AnimalModal.propTypes = {
 const mapStateToProps = state => ({
   animal: state.animal,
 });
-
 
 export default connect(mapStateToProps, { addAnimal })(AnimalModal);

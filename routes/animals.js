@@ -23,6 +23,7 @@ router.get('/:id', async (req, res) => {
 
     if (!animal) {
       res.status(400).json({ message: `No Animal with the ID: ${id}` });
+      return;
     }
 
     res.status(200).json(animals);
@@ -40,6 +41,7 @@ router.post('/', async (req, res) => {
 
     if (!name || !description || !species) {
       res.status(400).json({ message: 'Must provide name, description, and species' });
+      return;
     }
 
     const newAnimal = new Animal({ name, description, species, breed });
@@ -61,6 +63,7 @@ router.delete('/:id', async (req, res) => {
 
     if (!animal) {
       res.status(400).json({ message: `No Animal with the ID: ${id}` });
+      return;
     }
 
     await animal.remove();

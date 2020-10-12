@@ -19,13 +19,11 @@ class AnimalList extends Component {
 
     return (
       <ul>
-        {animals.map(({ id, name }) => (
-          <>
-            <li>
-              { id }: { name }
-              <Button color="danger" onClick={ this.onDeleteClick.bind(this, id) }>X</Button>
-            </li>
-          </>
+        {animals.length > 0 && animals.map(({ _id, name }) => (
+          <li key={ _id }>
+            { _id }: { name }
+            <Button color="danger" onClick={ this.onDeleteClick.bind(this, _id) }>X</Button>
+          </li>
         )) }
       </ul>
     );
