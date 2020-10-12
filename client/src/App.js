@@ -3,9 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Navigation from './components/Navigation';
-import { Container } from 'reactstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 function App() {
   return (
@@ -13,14 +13,12 @@ function App() {
       <header>
         <Navigation />
       </header>
-      <main className="App">
-        <Container>
-          <Switch>
-            <Route path='/' exact component={ Home } />
-            <Route path='/about' component={ About } />
-          </Switch>
-        </Container>
-      </main>
+      <main className="App mx-auto mt-3">
+        <Switch>
+          <Route path='/' exact component={ Home } />
+          <Route path='/about' component={ About } />
+        </Switch>
+      </main >
     </>
   );
 }
