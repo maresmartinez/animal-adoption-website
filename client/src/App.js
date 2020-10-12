@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { Provider } from 'react-redux';
+import store from './store';
+import AnimalList from './components/AnimalList';
+import AnimalModal from './components/AnimalModal';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // Allows us to share state between components
+    <Provider store={ store }>
+      <div className="App">
+        <h1>Hello World</h1>
+        <AnimalModal />
+        <AnimalList />
+      </div>
+    </Provider>
   );
 }
 
