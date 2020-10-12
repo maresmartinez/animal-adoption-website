@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
   try {
     const { name, description, species, breed } = req.body;
 
-    if (!name || !description | !species) {
+    if (!name || !description || !species) {
       res.status(400).json({ message: 'Must provide name, description, and species' });
     }
 
