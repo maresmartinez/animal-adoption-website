@@ -36,13 +36,14 @@ class AnimalModal extends Component {
     }
   };
 
+  // HACK: Repetitive. Find better way to reset state depending on new vs. edit modal
   resetState = () => {
     this.setState({
-      name: '',
-      description: '',
-      species: '',
-      breed: '',
-      contactEmail: '',
+      name: this.props.animal ? this.props.animal.name : '',
+      description: this.props.animal ? this.props.animal.description : '',
+      species: this.props.animal ? this.props.animal.species : '',
+      breed: this.props.animal ? this.props.animal.breed : '',
+      contactEmail: this.props.animal ? this.props.animal.contactEmail : '',
       image: null,
     });
   };
