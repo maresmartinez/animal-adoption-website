@@ -28,7 +28,7 @@ class AnimalListItem extends Component {
           <CardText><strong>Species:</strong> { species }</CardText>
           { breed && <CardText><strong>Breed:</strong> { breed }</CardText> }
           <CardText>{ description }</CardText>
-          <CardText>Please lease contact <strong>{ contactEmail }</strong> to learn more about { name }.</CardText>
+          <CardText>Please contact <strong>{ contactEmail }</strong> to learn more about { name }.</CardText>
           <Button color="danger" size="sm" className="mr-2" onClick={ this.onDeleteClick.bind(this, _id) }>Delete</Button>
           <AnimalModal animal={ this.props.animal } buttonProps={ { color: 'primary', size: 'sm' } } />
         </CardBody>
