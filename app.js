@@ -20,8 +20,10 @@ mongoose.connect(uri, {
 
 // Routes
 const animalRoutes = require('./routes/animals');
+const imageRoutes = require('./routes/images');
 
 app.use('/api/animals', animalRoutes);
+app.use('/api/images', imageRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

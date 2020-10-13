@@ -12,17 +12,17 @@ import {
 import { connect } from 'react-redux';
 import { addAnimal, editAnimal } from '../actions/animalActions';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import imageUploader from '../utils/imageUploader';
 
 class AnimalModal extends Component {
-
-
-
   state = {
     modal: false,
     name: this.props.animal ? this.props.animal.name : '',
     description: this.props.animal ? this.props.animal.description : '',
     species: this.props.animal ? this.props.animal.species : '',
     breed: this.props.animal ? this.props.animal.breed : '',
+    image: null,
   };
 
   toggle = () => {
@@ -32,19 +32,27 @@ class AnimalModal extends Component {
   };
 
   onInputChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    if (e.target.name === 'image') {
+      this.setState({ [e.target.name]: e.target.files[0] });
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
 
-    const { name, description, species, breed } = this.state;
+    const { name, description, species, breed, image } = this.state;
 
     const newAnimalProps = {
       name,
       description,
       species,
       breed
+    };
+
+    if (image) {
+      newAnimalProps.imageURL = await imageUploader(image);
     };
 
     if (this.props.animal) {
@@ -86,6 +94,10 @@ class AnimalModal extends Component {
               <FormGroup>
                 <Label for="breed">Breed</Label>
                 <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } value={ this.state.breed } />
+              </FormGroup>
+              <FormGroup>
+                <Label for="Image">Image</Label>
+                <Input type="file" name="image" id="image" onChange={ this.onInputChange } />
               </FormGroup>
               <Button color="dark" block>{ this.props.animal ? 'Save Changes' : 'Add Animal' }</Button>
             </Form>
