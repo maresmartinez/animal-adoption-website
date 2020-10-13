@@ -23,7 +23,7 @@ class AnimalListItem extends Component {
     return (
       <Card body className="p-0 h-100">
         <CardHeader>{ name }</CardHeader>
-        {imageURL && <CardImg top width="20%" src={ imageURL } alt="Card image cap" /> }
+        {imageURL && <CardImg top width="20%" src={ imageURL } alt={ `Image of ${name} the ${species}` } /> }
         <CardBody>
           <CardText><strong>Species:</strong> { species }</CardText>
           { breed && <CardText><strong>Breed:</strong> { breed }</CardText> }

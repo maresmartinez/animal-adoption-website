@@ -16,7 +16,7 @@ const Navigation = () => {
 
   return (
     <Navbar color="light" light expand="md">
-      <NavbarBrand href="/">Adopt-a-lot</NavbarBrand>
+      <NavbarBrand href="/"><img src="/paws.png" alt="Two paws, the logo for Adopt-a-lot" />&nbsp;Adopt-a-lot</NavbarBrand>
       <NavbarToggler onClick={ toggle } />
       <Collapse isOpen={ isOpen } navbar>
         <Nav className="mr-auto" navbar>
@@ -26,6 +26,7 @@ const Navigation = () => {
           <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
+          <NavLink href="https://github.com/maresmartinez/animal-adoption-website" target="_blank" rel="noopener noreferrer">Github</NavLink>
         </Nav>
       </Collapse>
     </Navbar>
