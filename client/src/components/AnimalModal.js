@@ -10,16 +10,19 @@ import {
   Input
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { addAnimal } from '../actions/animalActions';
+import { addAnimal, editAnimal } from '../actions/animalActions';
 import PropTypes from 'prop-types';
 
 class AnimalModal extends Component {
+
+
+
   state = {
     modal: false,
-    name: '',
-    description: '',
-    species: '',
-    breed: '',
+    name: this.props.animal ? this.props.animal.name : '',
+    description: this.props.animal ? this.props.animal.description : '',
+    species: this.props.animal ? this.props.animal.species : '',
+    breed: this.props.animal ? this.props.animal.breed : '',
   };
 
   toggle = () => {
@@ -37,46 +40,54 @@ class AnimalModal extends Component {
 
     const { name, description, species, breed } = this.state;
 
-    const newAnimal = {
+    const newAnimalProps = {
       name,
       description,
       species,
       breed
     };
 
-    this.props.addAnimal(newAnimal);
+    if (this.props.animal) {
+      newAnimalProps._id = this.props.animal._id;
+      this.props.editAnimal(newAnimalProps);
+
+    } else {
+      this.props.addAnimal(newAnimalProps);
+    }
     this.toggle();
   };
+
+  modalDescription = () => `${this.props.animal ? 'Edit' : 'Add'} Animal`;
 
   render() {
     return (
       <div>
-        <Button color="dark" onClick={ this.toggle } >Add Animal</Button>
+        <Button onClick={ this.toggle } { ...this.props.buttonProps } >{ this.modalDescription() }</Button>
 
         <Modal
           isOpen={ this.state.modal }
           toggle={ this.toggle }
         >
-          <ModalHeader toggle={ this.toggle }>Add Animal</ModalHeader>
+          <ModalHeader toggle={ this.toggle }>{ this.modalDescription() }</ModalHeader>
           <ModalBody>
             <Form onSubmit={ this.onSubmit }>
               <FormGroup>
                 <Label for="name">Name *</Label>
-                <Input type="text" name="name" id="name" onChange={ this.onInputChange } />
+                <Input type="text" name="name" id="name" onChange={ this.onInputChange } value={ this.state.name } />
               </FormGroup>
               <FormGroup>
                 <Label for="description">Description *</Label>
-                <Input type="textarea" name="description" id="description" onChange={ this.onInputChange } />
+                <Input type="textarea" name="description" id="description" onChange={ this.onInputChange } value={ this.state.description } />
               </FormGroup>
               <FormGroup>
                 <Label for="species">Species *</Label>
-                <Input type="text" name="species" id="species" onChange={ this.onInputChange } />
+                <Input type="text" name="species" id="species" onChange={ this.onInputChange } value={ this.state.species } />
               </FormGroup>
               <FormGroup>
                 <Label for="breed">Breed</Label>
-                <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } />
+                <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } value={ this.state.breed } />
               </FormGroup>
-              <Button color="dark" block>Add Animal</Button>
+              <Button color="dark" block>{ this.props.animal ? 'Save Changes' : 'Add Animal' }</Button>
             </Form>
           </ModalBody>
         </Modal>
@@ -86,11 +97,10 @@ class AnimalModal extends Component {
 }
 
 AnimalModal.propTypes = {
-  addAnimal: PropTypes.func.isRequired,
+  addAnimal: PropTypes.func,
+  editAnimal: PropTypes.func,
+  animal: PropTypes.object,
+  buttonProps: PropTypes.object
 };
 
-const mapStateToProps = state => ({
-  animal: state.animal,
-});
-
-export default connect(mapStateToProps, { addAnimal })(AnimalModal);
+export default connect(null, { addAnimal, editAnimal })(AnimalModal);

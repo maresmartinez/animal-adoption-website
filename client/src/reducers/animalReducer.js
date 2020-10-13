@@ -1,4 +1,10 @@
-import { GET_ANIMALS, ADD_ANIMAL, DELETE_ANIMAL, ANIMALS_LOADING } from '../actions/types';
+import {
+  GET_ANIMALS,
+  ADD_ANIMAL,
+  EDIT_ANIMAL,
+  DELETE_ANIMAL,
+  ANIMALS_LOADING
+} from '../actions/types';
 
 const initialState = {
   animals: [],
@@ -22,6 +28,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         animals: state.animals.filter(animal => animal._id !== action.payload)
+      };
+    case EDIT_ANIMAL:
+      return {
+        ...state,
+        animals: [...state.animals.filter(animal => animal._id !== action.payload._id), action.payload]
       };
     case ANIMALS_LOADING:
       return {

@@ -6,7 +6,7 @@ const Home = () => (
   <>
     <h2>Welcome to Adopt-a-lot</h2>
     <p>Check out the animals below that are in need of a loving home.</p>
-    <AnimalModal />
+    <AnimalModal buttonProps={ { color: 'dark' } } />
     <AnimalList />
   </>
 );
