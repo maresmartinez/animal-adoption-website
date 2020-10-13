@@ -64,8 +64,18 @@ class AnimalModal extends Component {
 
     } else {
       this.props.addAnimal(newAnimalProps);
+
+      // Reset State
+      this.setState({
+        modal: false,
+        name: '',
+        description: '',
+        species: '',
+        breed: '',
+        contactEmail: '',
+        image: null,
+      });
     }
-    this.toggle();
   };
 
   modalDescription = () => `${this.props.animal ? 'Edit' : 'Add'} Animal`;
