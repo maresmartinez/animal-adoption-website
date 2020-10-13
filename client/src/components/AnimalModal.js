@@ -29,6 +29,22 @@ class AnimalModal extends Component {
     this.setState({
       modal: !this.state.modal
     });
+
+    // Clear form if modal is closed
+    if (!this.state.modal) {
+      this.resetState();
+    }
+  };
+
+  resetState = () => {
+    this.setState({
+      name: '',
+      description: '',
+      species: '',
+      breed: '',
+      contactEmail: '',
+      image: null,
+    });
   };
 
   onInputChange = (e) => {
@@ -65,16 +81,7 @@ class AnimalModal extends Component {
     } else {
       this.props.addAnimal(newAnimalProps);
 
-      // Reset State
-      this.setState({
-        modal: false,
-        name: '',
-        description: '',
-        species: '',
-        breed: '',
-        contactEmail: '',
-        image: null,
-      });
+      this.toggle();
     }
   };
 
@@ -85,41 +92,39 @@ class AnimalModal extends Component {
       <>
         <Button onClick={ this.toggle } { ...this.props.buttonProps } >{ this.modalDescription() }</Button>
 
-        <Modal
-          isOpen={ this.state.modal }
-          toggle={ this.toggle }
-        >
-          <ModalHeader toggle={ this.toggle }>{ this.modalDescription() }</ModalHeader>
-          <ModalBody>
-            <Form onSubmit={ this.onSubmit }>
-              <FormGroup>
-                <Label for="name">Name *</Label>
-                <Input type="text" name="name" id="name" onChange={ this.onInputChange } value={ this.state.name } />
-              </FormGroup>
-              <FormGroup>
-                <Label for="description">Description *</Label>
-                <Input type="textarea" name="description" id="description" onChange={ this.onInputChange } value={ this.state.description } />
-              </FormGroup>
-              <FormGroup>
-                <Label for="species">Species *</Label>
-                <Input type="text" name="species" id="species" onChange={ this.onInputChange } value={ this.state.species } />
-              </FormGroup>
-              <FormGroup>
-                <Label for="breed">Breed</Label>
-                <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } value={ this.state.breed } />
-              </FormGroup>
-              <FormGroup>
-                <Label for="contactEmail">Contact Email *</Label>
-                <Input type="email" name="contactEmail" id="contactEmail" onChange={ this.onInputChange } value={ this.state.contactEmail } />
-              </FormGroup>
-              <FormGroup>
-                <Label for="Image">Image</Label>
-                <Input type="file" name="image" id="image" onChange={ this.onInputChange } />
-              </FormGroup>
-              <Button color="dark" block>{ this.props.animal ? 'Save Changes' : 'Add Animal' }</Button>
-            </Form>
-          </ModalBody>
-        </Modal>
+        {this.state.modal &&
+          <Modal isOpen={ true } toggle={ this.toggle } >
+            <ModalHeader toggle={ this.toggle }>{ this.modalDescription() }</ModalHeader>
+            <ModalBody>
+              <Form onSubmit={ this.onSubmit }>
+                <FormGroup>
+                  <Label for="name">Name *</Label>
+                  <Input type="text" name="name" id="name" onChange={ this.onInputChange } value={ this.state.name } />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="description">Description *</Label>
+                  <Input type="textarea" name="description" id="description" onChange={ this.onInputChange } value={ this.state.description } />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="species">Species *</Label>
+                  <Input type="text" name="species" id="species" onChange={ this.onInputChange } value={ this.state.species } />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="breed">Breed</Label>
+                  <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } value={ this.state.breed } />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="contactEmail">Contact Email *</Label>
+                  <Input type="email" name="contactEmail" id="contactEmail" onChange={ this.onInputChange } value={ this.state.contactEmail } />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="Image">Image</Label>
+                  <Input type="file" name="image" id="image" onChange={ this.onInputChange } />
+                </FormGroup>
+                <Button color="dark" block>{ this.props.animal ? 'Save Changes' : 'Add Animal' }</Button>
+              </Form>
+            </ModalBody>
+          </Modal> }
       </>
     );
   }
