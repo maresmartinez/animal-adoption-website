@@ -32,7 +32,7 @@ export default function (state = initialState, action) {
     case EDIT_ANIMAL:
       return {
         ...state,
-        animals: [...state.animals.filter(animal => animal._id !== action.payload._id), action.payload]
+        animals: state.animals.map(animal => animal._id !== action.payload._id ? animal : action.payload)
       };
     case ANIMALS_LOADING:
       return {
