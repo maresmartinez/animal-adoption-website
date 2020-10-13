@@ -18,6 +18,14 @@ const Animal = model('Animal', new Schema({
 
   breed: {
     type: String,
+  },
+
+  imageURL: {
+    type: String
+  },
+
+  contactEmail: {
+    type: String,
   }
 }));
 

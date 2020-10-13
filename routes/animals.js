@@ -37,14 +37,14 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { name, description, species, breed } = req.body;
+    const { name, description, species, breed, imageURL, contactEmail } = req.body;
 
     if (!name || !description || !species) {
       res.status(400).json({ message: 'Must provide name, description, and species' });
       return;
     }
 
-    const newAnimal = new Animal({ name, description, species, breed });
+    const newAnimal = new Animal({ name, description, species, breed, imageURL, contactEmail });
     await newAnimal.save();
 
     res.status(200).json(newAnimal);
@@ -71,6 +71,8 @@ router.put('/:id', async (req, res) => {
     animal.description = req.body.description ? req.body.description : animal.description;
     animal.species = req.body.species ? req.body.species : animal.species;
     animal.breed = req.body.breed ? req.body.breed : animal.breed;
+    animal.imageURL = req.body.imageURL ? req.body.imageURL : animal.imageURL;
+    animal.contactEmail = req.body.contactEmail ? req.body.contactEmail : animal.contactEmail;
 
     await animal.save();
 
