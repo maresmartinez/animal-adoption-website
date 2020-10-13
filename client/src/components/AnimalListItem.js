@@ -20,7 +20,7 @@ class AnimalListItem extends Component {
   render() {
     const { _id, name, description, species, breed } = this.props.animal;
     return (
-      <Card body className="my-3">
+      <Card body className="my-3 p-0">
         <CardHeader>{ name }</CardHeader>
         <CardBody>
           <CardText><strong>Species:</strong> { species }</CardText>
