@@ -12,7 +12,6 @@ import {
 import { connect } from 'react-redux';
 import { addAnimal, editAnimal } from '../actions/animalActions';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import imageUploader from '../utils/imageUploader';
 
 class AnimalModal extends Component {
@@ -22,6 +21,7 @@ class AnimalModal extends Component {
     description: this.props.animal ? this.props.animal.description : '',
     species: this.props.animal ? this.props.animal.species : '',
     breed: this.props.animal ? this.props.animal.breed : '',
+    contactEmail: this.props.animal ? this.props.animal.contactEmail : '',
     image: null,
   };
 
@@ -33,6 +33,7 @@ class AnimalModal extends Component {
 
   onInputChange = (e) => {
     if (e.target.name === 'image') {
+      // TODO: Add validation, image size cannot exceed 10mb
       this.setState({ [e.target.name]: e.target.files[0] });
     } else {
       this.setState({ [e.target.name]: e.target.value });
@@ -42,16 +43,18 @@ class AnimalModal extends Component {
   onSubmit = async e => {
     e.preventDefault();
 
-    const { name, description, species, breed, image } = this.state;
+    const { name, description, species, breed, image, contactEmail } = this.state;
 
     const newAnimalProps = {
       name,
       description,
       species,
-      breed
+      breed,
+      contactEmail
     };
 
     if (image) {
+      // TODO: Add ability to remove image
       newAnimalProps.imageURL = await imageUploader(image);
     };
 
@@ -94,6 +97,10 @@ class AnimalModal extends Component {
               <FormGroup>
                 <Label for="breed">Breed</Label>
                 <Input type="text" name="breed" id="breed" onChange={ this.onInputChange } value={ this.state.breed } />
+              </FormGroup>
+              <FormGroup>
+                <Label for="contactEmail">Contact Email *</Label>
+                <Input type="email" name="contactEmail" id="contactEmail" onChange={ this.onInputChange } value={ this.state.contactEmail } />
               </FormGroup>
               <FormGroup>
                 <Label for="Image">Image</Label>

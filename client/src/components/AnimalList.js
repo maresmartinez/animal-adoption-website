@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAnimals, deleteAnimal } from '../actions/animalActions';
 import PropTypes from 'prop-types';
 import AnimalListItem from '../components/AnimalListItem';
+import { Row, Col } from 'reactstrap';
 
 class AnimalList extends Component {
 
@@ -14,11 +15,13 @@ class AnimalList extends Component {
     const { animals } = this.props.animal;
 
     return (
-      <>
-        {animals.map((animal) => (
-          <AnimalListItem key={ animal._id } animal={ animal } />
+      <Row>
+        { animals.map((animal) => (
+          <Col md="6">
+            <AnimalListItem key={ animal._id } animal={ animal } />
+          </Col>
         )) }
-      </>
+      </Row>
     );
   };
 };

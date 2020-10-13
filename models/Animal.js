@@ -26,6 +26,7 @@ const Animal = model('Animal', new Schema({
 
   contactEmail: {
     type: String,
+    required: true,
   }
 }));
 
