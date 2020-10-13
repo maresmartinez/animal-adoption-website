@@ -21,7 +21,7 @@ class AnimalListItem extends Component {
   render() {
     const { _id, name, description, species, breed, imageURL, contactEmail } = this.props.animal;
     return (
-      <Card body className="my-3 p-0">
+      <Card body className="p-0 h-100">
         <CardHeader>{ name }</CardHeader>
         {imageURL && <CardImg top width="20%" src={ imageURL } alt="Card image cap" /> }
         <CardBody>

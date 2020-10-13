@@ -17,7 +17,7 @@ class AnimalList extends Component {
     return (
       <Row>
         { animals.map((animal) => (
-          <Col md="6" key={ animal._id }>
+          <Col md="6" key={ animal._id } className="my-3">
             <AnimalListItem animal={ animal } />
           </Col>
         )) }
