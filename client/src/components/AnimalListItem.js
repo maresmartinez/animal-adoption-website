@@ -24,7 +24,7 @@ class AnimalListItem extends Component {
         <CardHeader>{ name }</CardHeader>
         <CardBody>
           <CardText><strong>Species:</strong> { species }</CardText>
-          <CardText><strong>Breed:</strong>: { breed || 'Unknown' }</CardText>
+          <CardText><strong>Breed:</strong> { breed || 'Unknown' }</CardText>
           <CardText>{ description }</CardText>
           <Button color="danger" size="sm" className="mr-2" onClick={ this.onDeleteClick.bind(this, _id) }>Delete</Button>
           <AnimalModal animal={ this.props.animal } buttonProps={ { color: 'primary', size: 'sm' } } />

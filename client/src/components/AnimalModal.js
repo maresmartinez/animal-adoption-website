@@ -61,7 +61,7 @@ class AnimalModal extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <Button onClick={ this.toggle } { ...this.props.buttonProps } >{ this.modalDescription() }</Button>
 
         <Modal
@@ -91,7 +91,7 @@ class AnimalModal extends Component {
             </Form>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }
